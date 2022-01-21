@@ -1,0 +1,119 @@
+//continue Day8
+
+keyPressed() {
+    if(key == 'p' || key == 'P'){            
+        game_pause++;
+        if( game_pause%2 == 1 ){                              
+            snake_direction_temp = snake_direction;       
+            snake_direction = 'P';                        
+        }else{
+            snake_direction = snake_direction_temp;           
+        }
+
+    }
+    if(snake_direction != 'P' && key == CODED){       
+        switch(keyCode){                             
+            case LEFT:
+                snake_direction = 'L';
+                break;
+            case RIGHT:
+                 snake_direction = 'R';
+                break;
+            case DOWN:
+                 snake_direction = 'D';
+                break;
+            case UP:
+                 snake_direction = 'U';
+                break;
+        }  
+    }else if( snake_direction != 'P' ){        
+        switch(key){
+            case 'A':
+            case 'a':
+                snake_direction = 'L';
+                break;
+            case 'D':
+            case 'd':
+                 snake_direction = 'R';
+                break;
+            case 'S':
+            case 's':
+                 snake_direction = 'D';
+                break;
+            case 'W':
+            case 'w':
+                snake_direction = 'U';
+                break;
+        }
+    }
+  }
+       
+   
+void food_new(int maxWidth, int maxHeight){   
+    fill(244,123,33);                                            
+    int food_outbody =0;                                      
+    if(food_key){                                           
+      while(food_outbody==0 ){ 
+          food_outbody = 1;
+          food_x = int( random(0, maxWidth)/grid ) * grid;          
+          food_y = int( random(0, maxHeight)/grid ) * grid;
+          for (int i=snake_length-1; i>=0 ; i--){
+            if ( food_x == x[i] && food_y == y[i] ){
+              food_outbody = 0;
+          }
+        }
+      }
+    }
+    rect(food_x, food_y, grid, grid);
+    food_key = false;                                          
+
+}     
+
+boolean snake_die(){                                   
+    if(snake_length>2){                                                                       
+        for(int i=1; i<snake_length; i++){
+            if(snake_head_x==x[i] && snake_head_y == y[i]){
+                show_gameover();                  
+                return true;
+            }
+        }
+    }
+   return false;
+}
+ 
+void show_gameover(){               
+    game_over = true;  
+    pushMatrix();
+    BestScore = BestScore > snake_length ? (BestScore - 2 ): (snake_length - 2);
+
+    background(0);  
+    translate(width/2, height/2 - 50);
+    fill(255);  
+    textAlign(CENTER); 
+    textSize(84);
+    text(snake_length - 2 + "/" + BestScore, 0, 0);
+
+    fill(120);
+    textSize(40);
+    text("Score / Best",0,230);
+    text("Game Over, Press 'R' to restart.", 0, 260);
+    popMatrix();
+   
+}
+   
+boolean game_again(){                                        
+    if(game_over && keyPressed && (key=='r'||key=='R') ){
+        snake_start();
+    }
+    return game_over;
+}
+   
+void snake_start(){                      
+    background(background_color);
+    snake_length = 2;
+    game_over = false;
+    snake_head_x = 0;
+    snake_head_y = 0;
+    snake_direction = 'R';
+    speed = 5;
+}     
