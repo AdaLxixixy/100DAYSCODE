@@ -1,0 +1,79 @@
+import java.util.Iterator;
+PImage P3Snow;
+PImage img;
+SnowSystem snow;
+
+void setup() {
+  fullScreen();
+  //size(800,600);
+  P3Snow= loadImage("back.jpg");
+  //imageMode(CENTER);
+  img=loadImage("img.png");
+  P3Snow.resize(width, height);
+  imageMode(CORNER);
+
+  snow= new SnowSystem(0.4);
+  snow.run();
+}
+
+void draw() {
+  background(40);
+  image(P3Snow, 0, 0, width, height);
+  stroke(240);
+  snow.run();
+  push();
+  imageMode(CENTER);
+  image(img, mouseX, mouseY, 150, 150);
+  pop();
+}
+
+class SnowSystem {
+  float speed;
+  ArrayList<Snowflake> snowflakes;
+
+  SnowSystem(float speed_) {
+    speed= speed_;
+    snowflakes= new ArrayList<Snowflake>();
+  }
+
+  void emit() {
+    if (speed >= 1) {
+      for (int i= 0; i < speed; i++) {
+        generate();
+      }
+    } else if (speed > 0) {
+      if (random(1) < speed) {
+        generate();
+      }
+    }
+   
+  }
+
+  void generate() {
+    PVector position=  new PVector(random(0, width), 0);
+    PVector velocity= new PVector(0, random(5, 10));
+    float rotation= random(0, 360);
+    float aVel= random(-2, 5);
+    float radius= random(10, 50);
+    float ratio= 0.618;
+    Snowflake s= new Snowflake(position, velocity, rotation, aVel, radius, ratio);
+    snowflakes.add(s);
+  }
+
+  void update() {
+    Iterator<Snowflake> ite= snowflakes.iterator();
+    while (ite.hasNext()) {
+      Snowflake s= ite.next();
+      s.update();
+      s.show();
+      if (s.position.y > (height + s.radius)) {
+        ite.remove();
+      }
+    }
+  }
+
+  void run() {
+    emit();
+    update();
+  }
+}
