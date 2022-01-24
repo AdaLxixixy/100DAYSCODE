@@ -1,0 +1,90 @@
+//continue Day11
+
+
+class Snowflake {
+  PVector position, velocity;
+  float rotation, aVelocity, radius, ratio;
+  Branch[] branches= new Branch[6];
+
+  Snowflake(PVector pos, PVector vel, float rot, float aVel, float r, float rat) {
+    position= pos;
+    velocity= vel;
+    rotation= rot;
+    aVelocity= aVel;
+    radius= r;
+    ratio= rat;
+
+
+    for (int i= 0; i< 6; i++) {
+      branches[i]= new Branch(radius, ratio, i*60);
+    }
+  }
+
+  void update() {
+    position.add(velocity);
+    rotation += aVelocity;
+     if (abs(position.x-mouseX)<50&&abs(position.y-mouseY)<50) {
+       println("yes");
+       position.x=random(width);
+       position.y=random(-100,0);
+    }
+  }
+
+  void show() {
+    pushMatrix();
+    translate(position.x, position.y);
+    rotate(radians(rotation));
+    for (Branch b : branches ) {
+      b.generate();
+    }
+    popMatrix();
+  }
+}
+
+class Branch {
+  float radius, ratio, rotation;
+
+
+  Branch(float radius_, float ratio_, float rot) {
+    radius= radius_;
+    ratio= ratio_;
+    rotation= rot;
+  } 
+
+  void generate() {
+    pushMatrix();
+    rotate(radians(rotation));
+    float len= getStartLength(radius, ratio);
+    branch(len);
+    popMatrix();
+  }
+
+  void branch(float len) {
+    strokeWeight(len*0.15);
+    strokeCap(ROUND);
+    line(0, 0, 0, -len);
+    translate(0, -len);
+
+    if (len > 2) {
+      pushMatrix();
+      branch(len * ratio);
+      popMatrix(); 
+
+      pushMatrix();
+      rotate(radians(-60));
+      branch(getStartLength(len, ratio));
+      popMatrix(); 
+
+      pushMatrix();
+      rotate(radians(60));
+      branch(getStartLength(len, ratio));
+      popMatrix();
+    }
+  }
+
+
+  float getStartLength(Float length, float ratio) {
+    float len= (1- ratio)* length;
+    return len;
+  }
+}
