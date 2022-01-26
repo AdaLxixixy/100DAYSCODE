@@ -1,0 +1,53 @@
+PImage background,ball;
+PGraphics arrow;
+int power = 100;
+boolean lanch = false;
+float angle;
+PVector speed;
+float x,y;
+boolean win = false;
+boolean gameover = false;
+void setup(){
+  size(1080,800);
+  background = loadImage("cuju.jpg"); 
+  ball = loadImage("ball.png"); 
+  arrow = createGraphics(50,100);
+  x=348;
+  y=454;
+
+}
+
+void draw(){
+  background(background);
+  arrow.beginDraw();
+  arrow.fill(power,0,0);
+  arrow.noStroke();
+  arrow.triangle(0,20,25,0,50,20);
+  arrow.rect(15,20,20,80);
+  arrow.endDraw();
+  imageMode(CENTER);
+  pushMatrix();
+  translate(377,477);
+  angle = radians(map(mouseX,0,width,0,360));
+  rotate(angle);
+  
+  image(arrow,0,0);
+  popMatrix();
+  imageMode(CORNER);
+  fill(0);
+  //text(angle,mouseX+20,mouseY+20);
+  image(ball,x,y,60,60);
+  
+  if(lanch){
+  x+=speed.x;
+  y-=speed.y;
+  if(x>920&&dist(x,y,918,119)<40){
+  win = true;
+  gameover = true;
+  lanch = false;
+  }else if(x>920&&dist(x,y,918,119)>40){
+  win = false;
+  gameover = true;
+  lanch = false;
+  }
+  }
