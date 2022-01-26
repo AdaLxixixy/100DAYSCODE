@@ -1,0 +1,34 @@
+// continue Day13
+
+
+  if(win&&gameover){
+    textSize(60);
+    fill(158,10,10);
+  text("You Win!",width/4,height/2);
+  }
+    if(!win&&gameover){
+    textSize(60);
+    fill(158,10,10);
+  text("You Failed!",width/4,height/2);
+  } 
+}
+
+void keyPressed(){
+if(key==' '&&!lanch){
+if(power<255){
+power+=10;
+}else{
+lanch=true;
+power = 100;
+speed = new PVector(sin(angle)*5,cos(angle)*5);
+}
+}
+}
+
+void mouseClicked(){
+if(mouseButton==RIGHT){
+  gameover = false;
+    x=348;
+  y=454;
+}
+}
