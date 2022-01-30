@@ -1,0 +1,49 @@
+//continue Day17
+
+
+void draw() {
+  background(255);
+
+  float noiseX = map(noise(t * 0.5), 0, 1, -windLevelH, windLevelH);
+  float noiseY = map(noise(t + 1), 0, 1, -windLevelV, windLevelV);
+  wind = new PVector(noiseX, noiseY);
+  pushMatrix();
+
+  colorMode(HSB);
+  fill(150, 180, 180, map(abs(noiseX), 0, windLevelH, 0, 180));
+  noStroke();
+  rect(width/2, 20, map(wind.x, -windLevelH, windLevelH, -width / 2, width / 2), 10);
+  fill(150, 180, 180, map(abs(noiseY), -windLevelV, windLevelV, 0, 180));
+  rect(20, height /2, 10, map(wind.y, -windLevelV, windLevelV, -height / 2, height / 2));
+
+  popMatrix();
+  if (balls.size() > 0) {
+    for (int i = 0; i < balls.size(); i++) {
+
+      Ball ball = balls.get(i);
+      ball.applyForce(gravity);
+      if (applyWind)
+        ball.applyForceWeighted(wind);
+
+      if (ball.update()) {
+        ball.show();
+      } else {
+        balls.remove(i);
+        i = 1 - 1;
+        println("ball removed, total " + balls.size());
+      }
+    }
+  }
+  t += 0.01 * 0.5;
+}
+
+void mousePressed() {
+  balls.add(new Ball());
+  println("ball added, total " + balls.size());
+}
+
+void keyPressed() {
+  if (key == ' ') {
+    changeChord();
+  }
+}
