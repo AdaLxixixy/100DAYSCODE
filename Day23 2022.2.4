@@ -1,0 +1,28 @@
+//Day3 continue
+
+
+void display() {
+    if (posX > 0 && posX < width && posY > 0  && posY < height) {
+  pixels[(int)posX+(int)posY*width] =  this.c;
+    }
+  }
+  
+  void checkEdge() {
+    if (posX < 0) {
+    posX = width;
+ posY = 1200-posY;
+    }
+    if (posX > width ) {
+    posX =  0;
+posY =1200-posY;
+    }
+    if (posY < 0 ) {
+    posY = height;
+    posX = 1200-posX;
+    }
+    if (posY > height){
+    posY =  0;
+    posX =1200-posX;
+  }
+}
+}
