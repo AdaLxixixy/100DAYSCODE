@@ -1,0 +1,33 @@
+//Day23 continue
+
+
+ArrayList<Particle> p=new ArrayList();
+ArrayList<Particle> p2=new ArrayList();
+ArrayList<Particle> p3=new ArrayList();
+ArrayList<Particle> p4=new ArrayList();
+ArrayList<Particle> p5=new ArrayList();
+ArrayList<Particle> p6=new ArrayList();
+ArrayList<Particle> p7=new ArrayList();
+ArrayList<Particle> p8=new ArrayList();
+ArrayList<Particle> p9=new ArrayList();
+ArrayList<Particle> p10=new ArrayList();
+ArrayList<Particle> p11=new ArrayList();
+ArrayList<Particle> p12=new ArrayList();
+ArrayList<Particle> p13=new ArrayList();
+ArrayList<Particle> p14=new ArrayList();
+ArrayList<Particle> p15=new ArrayList();
+ArrayList<Particle> p16=new ArrayList();
+ArrayList<Particle> p17=new ArrayList();
+
+void setup() {
+  size(1200, 1200);
+background(0);
+  noStroke();
+  
+  for (int i = 0; i < 5000; i++) { 
+    float x = random(0,500);
+    float y = random(0,300);
+    int c = color(255,0,0,80);
+    Particle pp=new Particle(x,y,c);
+    p.add(pp);
+  }
