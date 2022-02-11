@@ -1,0 +1,35 @@
+class LetterGenerator {
+  
+  PShape a, b, c, d;
+  ArrayList<Letter> letters;
+  PVector position;
+  float offset = 150;
+  
+  LetterGenerator(String input, float x, float y) {
+    initShapes();
+    position = new PVector(x, y);
+    letters = new ArrayList<Letter>();
+    
+    for (int i=0; i<input.length(); i++) {     
+      char ch = input.charAt(i);
+      
+      float px = position.x + ((i+1) * offset);
+      float py = position.y;
+      
+      switch(ch) {
+        case 'a':
+          letters.add(new Letter(a, px, py));
+          break;
+        case 'b':
+          letters.add(new Letter(b, px, py));
+          break;
+        case 'c':
+          letters.add(new Letter(c, px, py));
+          break;
+        case 'd':
+          letters.add(new Letter(d, px, py));
+          break;
+      }
+    }
+    
+  }
