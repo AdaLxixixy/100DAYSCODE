@@ -1,0 +1,26 @@
+PImage img, img2;
+float birdX, birdY;
+float birdYspeed=8;
+float birdXspeed=1;
+int  t;
+int index;
+boolean flag=true;
+boolean run;
+ArrayList<Rain>rains=new ArrayList<Rain>();
+float x=600;
+PImage flower;
+PImage back;
+void sets() {
+  index=int(random(1, 4));
+}
+void setup() {
+  size(800, 800);
+  img=loadImage("img.png");
+  img2=loadImage("img2.png");
+  flower=loadImage("flower.png");
+  back=loadImage("back.jpg");
+  birdX=width;
+  birdY=400;
+  imageMode(CENTER);
+  sets();
+}
