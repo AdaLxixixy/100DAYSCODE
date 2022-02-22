@@ -30,14 +30,11 @@ def draw():
     ch_1.set(400, 1, 0, 0)
     ch_2.set(401, 1, 0, 0)
     
-    # timer?? 
     
     for i in range(0,20):
         p = lerpColor(c, d, 1.0* i/width)
         stroke(p)
-        #line(i, 0, i, height)
 
-        #draws 20 concentric circles of decreasing diameter and decreasing lineWeight
         strokeWeight(circleSize/25.0) 
         ellipse(width/2,height, circleSize, circleSize)
         circleSize = circleSize * constantFactor
