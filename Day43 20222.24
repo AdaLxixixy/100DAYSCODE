@@ -1,0 +1,58 @@
+numRobots = 5;
+robots = [0]*numRobots;
+currentRobot = 0; 
+
+def setup():
+  size(800,600); 
+  smooth();
+  global numRobots, robots;
+  for i in range(numRobots):
+    colour = color(204, 102, 0); 
+    robots[i] = ClassyRobot(0, [], False, 2, 2); 
+
+def draw():
+  global numRobots, robots;
+  background(251,128,114);
+  img = loadImage("img.png")
+  image(img, 0, 0, width/3, height/3)
+
+  for i in range(numRobots):
+    robots[i].display(); # the draw conditions _I_ defined in class ClassyRobot()
+
+def mousePressed():
+  global numRobots, currentRobot;
+  robots[currentRobot].start(mouseX, mouseY,); # start is an activation _I_ defined in class ClassyRobot(object)
+  currentRobot += 1;
+  if (currentRobot >= numRobots):
+    currentRobot = 0;
+  name(currentRobot);
+
+def save(i):
+  global numRobots;
+  with open('data/myfile.txt', 'a+') as textFile:
+    textFile.write("\nRobot %s name is:" %i + robots[i].name)
+   
+def load(i):
+  pass;
+
+def name(i):
+  global numRobots, currentRobot;
+  robots[i].name = 'Roby','Sarah','John','Jack','David'
+  print('My name is: `%s`' %i, robots[i].name);
+  if currentRobot > 5:
+    robots[currentRobot].shbam = True;
+  else:
+    save(i);  
+    load(i); 
+
+class ClassyRobot(object):
+ 
+  def __init__(self):
+    self.param = param;
+   
+  def start(self):
+   pass;
+ 
+  def display(self):
+   pass;
+     
