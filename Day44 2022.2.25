@@ -1,0 +1,51 @@
+import ddf.minim.analysis.*;
+import ddf.minim.*;
+
+Minim       minim;
+AudioPlayer BGM;
+FFT         fft;
+/**背景颜色*/
+int background_color = 255;
+
+/**贪吃蛇的长度*/
+int snake_length = 2;
+/**贪吃蛇的最大长度*/
+int snake_length_max = 1000;
+/**贪吃蛇头部位置X*/
+int snake_head_x;
+/**贪吃蛇头部位置Y*/
+int snake_head_y;
+/**贪吃蛇身体部位的位置x*/
+int[] x = new int [snake_length_max];
+/**贪吃蛇身体部位的位置y*/
+int[] y = new int [snake_length_max];
+
+/**游戏的网格边长*/
+int grid=20;
+
+/**贪吃蛇的行走方向*/
+char snake_direction = 'R';
+/**贪吃蛇的行走方向的temp*/
+char snake_direction_temp;
+
+//设置贪吃蛇移动的速度
+/**贪吃蛇每秒钟移动的格子数*/
+int speed = 5;    //5格每秒为初始值
+/**时刻*/
+int time_saved;  
+int time_passed;
+int time_interval;
+
+//设置食物
+/**判断是否存在食物*/
+boolean food_key = true; //若为真，则是游戏中已经存在食物
+/**食物位置x*/
+int food_x;
+/**食物位置y*/
+int food_y;
+
+int BestScore = snake_length - 2;
+
+int game_pause = 0;
+boolean game_over = false;
+boolean game_begin = false;
