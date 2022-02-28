@@ -1,0 +1,48 @@
+//Day46 continue
+
+
+void draw(){
+  if(keyPressed && (key=='r'||key=='R') ){
+        game_begin = true;
+    }
+  if(game_again()){
+        return; 
+      }  
+  time_interval = 1000/speed; //移动的间隔时间
+  time_passed = millis() - time_saved; //经过的时间
+  
+  if(time_passed > time_interval && snake_direction != 'P' && game_begin)  //贪吃蛇移动的条件
+  {
+     
+      background(background_color);  //设置背景颜色
+      
+      //选择移动的方向
+      switch(snake_direction){           
+            case 'L':               //向左
+                snake_head_x -= grid;
+                break;
+            case 'R':               //向右
+                snake_head_x += grid;
+                break;
+            case 'D':               //向下
+                snake_head_y += grid;
+                break;
+            case 'U':               //向上
+                snake_head_y -= grid;
+                break;
+
+       }
+       
+      //产生食物
+      food_new(width,height);  //产生食物的函数，左右数据为食物出现的范围
+  
+      //贪吃蛇吃食物
+      if( snake_head_x == food_x && snake_head_y == food_y)    //判断贪吃蛇的头是否抵达食物位置
+      {
+        food_key = true;   //又可以产生新的食物
+        snake_length++;   //蛇的长度增加
+         if ( snake_length%5 ==1){
+           speed ++; 
+         }
+        speed = min(10,speed);//控制最大速度
+      }
