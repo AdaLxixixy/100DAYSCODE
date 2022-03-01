@@ -1,0 +1,42 @@
+// Day47 continue
+
+
+        for(int i=snake_length-1; i>0; i--){    //在数组中给头部腾出位置，可以理解为，身体先全部退回去，
+            x[i] = x[i-1];                      //然后新的头部出现在食物的位置上    
+            y[i] = y[i-1];
+        }
+        x[0] = snake_head_x;                    //在数组中储存新的头部的位置
+        y[0] = snake_head_y;
+        
+        if(snake_head_x < 0){                   //假如撞墙，则从另一侧出现
+          snake_head_x = width;
+        }else if(snake_head_x > width ){
+          snake_head_x = 0;                 //此处若设为0则出现bug
+        }
+        
+        if(snake_head_y < 0){
+          snake_head_y = height;
+        }else if(snake_head_y > height ){
+          snake_head_y = 0;                 //此处若设为0则出现bug
+        }
+        
+        
+        stroke(0);          //描边的颜色
+        strokeWeight(1);    //线宽为1
+
+        fill(50);              //头的颜色
+        rect(x[0],y[0],grid,grid);       //头的位置
+
+        //draw snakeBody
+        fill(80);
+        for(int i=1; i<snake_length; i++){
+            rect(x[i],y[i],grid,grid);
+        }
+        if(snake_die() ){
+            return;
+        }
+        time_saved = millis();   //重新设定时间
+       
+      }      
+      
+}
