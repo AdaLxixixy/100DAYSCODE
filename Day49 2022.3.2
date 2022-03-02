@@ -1,0 +1,50 @@
+//Day48 continue
+
+
+void keyPressed() {
+    if(key == 'p' || key == 'P'){            
+        game_pause++;
+        if( game_pause%2 == 1 ){                              
+            snake_direction_temp = snake_direction;       
+            snake_direction = 'P';                        
+        }else{
+            snake_direction = snake_direction_temp;           
+        }
+
+    }
+    if(snake_direction != 'P' && key == CODED){       
+        switch(keyCode){                             
+            case LEFT:
+                snake_direction = 'L';
+                break;
+            case RIGHT:
+                 snake_direction = 'R';
+                break;
+            case DOWN:
+                 snake_direction = 'D';
+                break;
+            case UP:
+                 snake_direction = 'U';
+                break;
+        }  
+    }else if( snake_direction != 'P' ){        
+        switch(key){
+            case 'A':
+            case 'a':
+                snake_direction = 'L';
+                break;
+            case 'D':
+            case 'd':
+                 snake_direction = 'R';
+                break;
+            case 'S':
+            case 's':
+                 snake_direction = 'D';
+                break;
+            case 'W':
+            case 'w':
+                snake_direction = 'U';
+                break;
+        }
+    }
+  }
