@@ -1,0 +1,36 @@
+//Day49 continue
+
+
+void food_new(int maxWidth, int maxHeight){   
+    fill(244,123,33);                                             //食物的颜色
+    int food_outbody =0;                                        //判断食物是否在体内
+    if(food_key){                                              //如果上一个食物已经被吃了
+      while(food_outbody==0 ){ 
+          food_outbody = 1;
+          food_x = int( random(0, maxWidth)/grid ) * grid;       //随机出现新的食物    
+          food_y = int( random(0, maxHeight)/grid ) * grid;
+          for (int i=snake_length-1; i>=0 ; i--){
+            if ( food_x == x[i] && food_y == y[i] ){
+              food_outbody = 0;
+          }
+        }
+      }
+    }
+    rect(food_x, food_y, grid, grid);
+    food_key = false;                                          //设定为未吃
+
+}     
+    
+//贪吃蛇的死亡
+  
+boolean snake_die(){                                   
+    if(snake_length>2){                                                                       //自残而死
+        for(int i=1; i<snake_length; i++){
+            if(snake_head_x==x[i] && snake_head_y == y[i]){
+                show_gameover();                  
+                return true;
+            }
+        }
+    }
+   return false;
+}
