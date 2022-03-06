@@ -1,0 +1,60 @@
+import processing.sound.*;
+
+SinOsc[] sin1;
+
+int t;
+
+boolean [][] selected;
+
+float [][] notes;
+
+int spacing = 50;
+
+int a = 1;
+
+void setup()
+
+{
+
+  sin1 = new SinOsc[5];
+
+  for (int j =0; j<5; j++)
+
+  {
+
+    sin1[j] = new SinOsc(this);
+
+  }
+
+  size(800, 400);
+
+  t = 0;
+
+  selected = new boolean[5][16];
+
+  notes = new float[5][16];
+
+  for (int i =0; i<5; i++)
+
+    for (int j =0; j<16; j++)
+
+    {
+
+      selected[i][j] = false;
+
+    }
+
+  for (int j =0; j<16; j++)
+
+  {
+    notes[0][j] = 100;    
+
+    notes[1][j] = 200;  
+
+    notes[2][j] = 300; 
+
+    notes[3][j] = 400; 
+
+    notes[4][j] = 500;
+  }
+}
