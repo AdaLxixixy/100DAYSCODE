@@ -1,0 +1,36 @@
+//Day53 continue
+
+
+void draw()
+
+{   
+
+  if (frameCount%15==1) 
+
+  {
+
+    t=(t+1*a)%16;
+
+    for (int j =0; j<5; j++)
+
+    {
+
+      sin1[j].stop();
+
+    }
+
+    for (int i = 0; i<5; i++)
+
+    {
+
+      if (selected[i][t]) 
+
+      {
+
+        sin1[i].freq(notes[i][t]);
+
+        sin1[i].play();
+
+      }
+
+    }
