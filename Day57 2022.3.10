@@ -1,0 +1,26 @@
+//Day56 continue
+
+
+void mousePressed()
+
+{
+
+  int eye1 = mouseX/spacing;
+
+  int eye2 = mouseY/spacing;
+
+  if (eye1>-1 && eye1<16 && eye2>-1 && eye2<5) selected[eye2][eye1]=!selected[eye2][eye1];
+
+  if (mouseX > 320 && mouseX < 370 && mouseY > 330 && mouseY < 380 )
+
+    a = 0;
+
+  if (mouseX > 380 && mouseX < 420 && mouseY > 330 && mouseY < 380 )
+
+    a = 1;
+
+  if (mouseX > 440 && mouseX < 500 && mouseY > 330 && mouseY < 380 )
+
+    t = -1;
+
+}
