@@ -1,0 +1,28 @@
+import java.util.Iterator;
+PImage P3Snow;
+PImage img;
+SnowSystem snow;
+
+void setup() {
+  fullScreen();
+  //size(800,600);
+  P3Snow= loadImage("back.jpg");
+  //imageMode(CENTER);
+  img=loadImage("img.png");
+  P3Snow.resize(width, height);
+  imageMode(CORNER);
+
+  snow= new SnowSystem(0.4);
+  snow.run();
+}
+
+void draw() {
+  background(40);
+  image(P3Snow, 0, 0, width, height);
+  stroke(240);
+  snow.run();
+  push();
+  imageMode(CENTER);
+  image(img, mouseX, mouseY, 150, 150);
+  pop();
+}
