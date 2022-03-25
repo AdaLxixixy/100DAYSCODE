@@ -1,0 +1,26 @@
+class Rain{
+ float x,y,d;
+ float a;
+ Rain(float x,float y){
+  this.x=x;
+  this.y=y;
+  d=random(10,25);
+  a=255;
+ }
+ 
+ void show(){
+  noFill();
+  stroke(255,a);
+  strokeWeight(.1);
+  ellipse(x,y,d,d);
+  ellipse(x,y,d/2,d/2);
+  ellipse(x,y,d/4,d/4);
+ }
+ void move(){
+  d++;
+  a-=2;
+  if(a<0){
+   rains.remove(this);
+  }
+ }
+}
