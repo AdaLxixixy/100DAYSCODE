@@ -1,0 +1,34 @@
+import processing.sound.*;
+
+AudioIn ai;
+
+Amplitude ampl;
+
+float y;
+boolean b = false;
+
+void setup(){
+  size(600, 800);
+  y = 0;
+  ai = new AudioIn(this, 0);
+  ai.play();
+  
+  ampl = new Amplitude(this);
+  ampl.input(ai);
+}
+
+void draw(){
+  background(255);
+  
+  float v = ampl. analyze();
+  if(v > 0.3 && !b){
+     y++;
+  } else if(v < 0.25 && b){
+     y+=0;
+  }
+  
+  
+  stroke(0);
+  fill(100);
+  ellipse(width/2, y, 50, 50);
+}
