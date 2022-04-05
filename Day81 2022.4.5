@@ -1,0 +1,39 @@
+PImage ACar;
+PImage ARoad;
+float x1, y1, x2, y2;
+float speedX1, speedX2;
+
+void setup() {
+  size(1000, 800, P2D);
+  ARoad = loadImage("ARoad.jpg");
+  ARoad.resize(width*3, height);
+  imageMode(CENTER);
+  
+  ACar = loadImage("ACar.jpg");
+  ACar.resize(width, height/4);
+  
+  x1 = width/2;
+  y1 = height/2;
+  x2 = 35 ;
+  y2 = 500;
+  speedX1 = 0.9;
+  speedX2 = speedX1 * 0.8;
+}
+
+void draw() {
+  background(0, 255);
+    
+  tint(255, 127);
+  image(ARoad, x1, y1);
+  
+  noTint();
+  image(ACar, x2, y2); 
+  
+  x2 += speedX2;
+  x1 += speedX1;
+    
+  if (x2 > width || x2 < 0) {
+    speedX2 *= -1;  
+    speedX1 *= -1;
+  }
+}
